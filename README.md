@@ -8,6 +8,7 @@ This is an example for how to build a Spring Boot App with Maven and package it 
 * Java Version 8 or later (the project is build against JDK 8, 11 and 14)
 
 ## Usage
+### Run locally with Maven
 Execute the following command:
 ```
 mvn clean spring-boot:run
@@ -18,7 +19,35 @@ Then open in a browser:
 http://localhost:8080
 ```
 
+### Run locally with Docker
+Execute the following commands:
+```
+mvn clean verify
+
+docker load --input target/jib-image.tar
+
+docker run --rm -p 8080:8080 docker.pkg.github.com/simontunnat/maven-spring-boot-docker-example/maven-spring-boot-docker-example
+```
+
+Then open in a browser:
+```
+http://localhost:8080
+```
+
+### Install to Docker Registry and pull from there
+Execute the following commands:
+```
+mvn clean install
+
+docker run --rm -p 8080:8080 docker.pkg.github.com/simontunnat/maven-spring-boot-docker-example/maven-spring-boot-docker-example
+```
+
+Then open in a browser:
+```
+http://localhost:8080
+```
+
 ## Legal
-Copyright 2018 Simon Tunnat
+Copyright 2020 Simon Tunnat
 
 Licensed under the [Apache License](LICENSE), Version 2.0.

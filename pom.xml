@@ -11,7 +11,7 @@
   </parent>
 
   <groupId>org.tunnat.maven</groupId>
-  <artifactId>maven-spring-boot-docker-example</artifactId>
+  <artifactId>spring-boot-docker-example</artifactId>
   <version>${revision}</version>
   <packaging>jar</packaging>
   <name>${project.groupId}:${project.artifactId}</name>
@@ -34,6 +34,7 @@
 
   <properties>
     <revision>1.0-SNAPSHOT</revision>
+    <image>docker.pkg.github.com/simontunnat/maven-spring-boot-docker-example/maven-spring-boot-docker-example:${project.version}</image>
 
     <spring-boot.version>2.3.1.RELEASE</spring-boot.version>
   </properties>
@@ -75,6 +76,43 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
         <version>${spring-boot.version}</version>
+      </plugin>
+
+      <plugin>
+        <groupId>com.google.cloud.tools</groupId>
+        <artifactId>jib-maven-plugin</artifactId>
+        <version>2.4.0</version>
+        <executions>
+          <execution>
+            <id>jib-build</id>
+            <phase>package</phase>
+            <goals>
+              <goal>buildTar</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>jib-install</id>
+            <phase>install</phase>
+            <goals>
+              <goal>build</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <container>
+            <ports>
+              <port>8080</port>
+            </ports>
+          </container>
+          <from>
+            <image>gcr.io/distroless/java:8</image>
+          </from>
+          <to>
+            <tags>
+              <tag>latest</tag>
+            </tags>
+          </to>
+        </configuration>
       </plugin>
     </plugins>
   </build>

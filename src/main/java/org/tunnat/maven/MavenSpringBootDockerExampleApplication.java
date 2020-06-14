@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @RestController
-public class ExampleApplication {
+public class MavenSpringBootDockerExampleApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(ExampleApplication.class, args);
+    SpringApplication.run(MavenSpringBootDockerExampleApplication.class, args);
   }
 
   @GetMapping("/")
